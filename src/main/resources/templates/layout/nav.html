@@ -10,53 +10,18 @@
 			<div class=" h_menu4" style="margin-top: 20px;">
 				<ul class="memenu skyblue">
 					<li class="grid"><a class="color1" th:href="@{/4MEN}">VỀ 4MEN</a></li>
-					<li><a class="color1" th:href="@{/4MEN/product}">SẢN PHẨM</a>
+					<li><a class="color1" th:href="@{/4MEN/product}">GIÀY BÓNG ĐÁ</a>
 						<div class="mepanel">
 							<div class="row">
-								<div class="col1">
+								<div class="col_menu">
 									<div class="h_nav">
-										<h4>Khoảng giá</h4>
 										<form th:action="@{|/4MEN/product/search|}" method="post">
 											<ul>
-												<li value="1"><a th:href="@{/4MEN/product/price/1}">Dưới 2
-														triệu</a></li>
-												<li value="2"><a th:href="@{/4MEN/product/price/2}">Từ 2 triệu đến
-														5 triệu</a></li>
-												<li value="3"><a th:href="@{/4MEN/product/price/3}">Từ 5 triệu đến
-														10 triệu</a></li>
-												<li value="4"><a th:href="@{/4MEN/product/price/4}">Từ 10 triệu
-														đến 15 triệu</a></li>
-												<li value="5"><a th:href="@{/4MEN/product/price/5}">Từ 15 triệu
-														đến 20 triệu</a></li>
-												<li value="6"><a th:href="@{/4MEN/product/price/6}">Từ 20 triệu
-														đến 25 triệu</a></li>
-												<li value="7"><a th:href="@{/4MEN/product/price/7}">Trên 25
-														triệu</a></option>
+												<li class="col-md-3" th:each="shoeType : ${shoeTypes}"><a
+														th:href="@{|/4MEN/product/shoeType/${shoeType.shoeTypeId}|}">[[${shoeType.name}]]</a>
+												</li>
 											</ul>
 										</form>
-									</div>
-								</div>
-
-								<div class="col1">
-									<div class="h_nav">
-										<h4>Loại dây</h4>
-										<ul>
-											<li class="" th:each="strap : ${straps}"><a
-													th:href="@{|/4MEN/product/strap/${strap.id}|}">[[${strap.name}]]</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-
-								<div class="col1">
-									<div class="h_nav">
-										<h4>Size mặt</h4>
-
-										<ul>
-											<li class="" th:each="size : ${sizes}"><a
-													th:href="@{|/4MEN/product/size/${size.id}|}">[[${size.name}]]</a>
-											</li>
-										</ul>
 									</div>
 								</div>
 							</div>
@@ -78,9 +43,48 @@
 							</div>
 						</div>
 					</li>
-					<li class="grid"><a class="color1" th:href="@{/4MEN/chinhSachBaoHanh}">CHÍNH SÁCH BẢO HÀNH</a>
+					<li><a class="color1" href="#">HƯỚNG DẪN</a>
+						<div class="mepanel">
+							<div class="row">
+								<div class="col1">
+									<div class="h_nav">
+									<h4>Hướng dẫn</h4>
+										<ul>
+											<li class="">
+												<a th:href="@{|/4MEN/support/chonSize|}">Cách chọn size</a>
+												<a th:href="@{|/4MEN/support/huongDanMuaHang|}">Hướng dẫn mua hàng</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="col1">
+									<div class="h_nav">
+									<h4>Chính sách</h4>
+										<ul>
+											<li class="">
+												<a th:href="@{|/4MEN/support/chinhSachVanChuyen|}">Chính sách vận chuyển</a>
+												<a th:href="@{|/4MEN/support/chinhSachBaoHanh|}">Chính sách bảo hành</a>
+											</li>
+										</ul>
+										
+									</div>
+								</div>
+								<div class="col1">
+									<div class="h_nav">
+									<h4>Quy định</h4>
+										<ul>
+											<li class="">
+												<a th:href="@{|/4MEN/support/quyDinhDoiHang|}">Quy định đổi hàng</a>
+											</li>
+										</ul>
+										
+									</div>
+								</div>
+
+							</div>
+						</div>
 					</li>
-<li th:if="${#request.isUserInRole('ADMIN') || #request.isUserInRole('USER')}">
+					<li th:if="${#request.isUserInRole('ADMIN') || #request.isUserInRole('USER')}">
 									<a th:href="@{/admin}">QUẢN TRỊ</a>
 									</li>
 					<li><a class="color1" href="#">TÀI KHOẢN</a>

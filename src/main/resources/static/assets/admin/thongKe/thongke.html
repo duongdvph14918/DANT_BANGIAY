@@ -61,55 +61,255 @@
 .khung {
 	margin-left: 10px;
 }
+.card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.card {
+    --bs-card-spacer-y: 1rem;
+    --bs-card-spacer-x: 1rem;
+    --bs-card-title-spacer-y: 0.5rem;
+    --bs-card-border-width: 0;
+    --bs-card-border-color: rgba(0, 0, 0, 0.125);
+    --bs-card-border-radius: 0.75rem;
+    --bs-card-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --bs-card-inner-border-radius: 0.75rem;
+    --bs-card-cap-padding-y: 0.5rem;
+    --bs-card-cap-padding-x: 1rem;
+    --bs-card-cap-bg: #fff;
+    --bs-card-cap-color: ;
+    --bs-card-height: ;
+    --bs-card-color: ;
+    --bs-card-bg: #fff;
+    --bs-card-img-overlay-padding: 1rem;
+    --bs-card-group-margin: 0.75rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: var(--bs-card-height);
+    word-wrap: break-word;
+    background-color: var(--bs-card-bg);
+    background-clip: border-box;
+    border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+    border-radius: var(--bs-card-border-radius);
+}
+.card .card-header {
+    padding: 1.5rem;
+}
+.card-header:first-child {
+    border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0;
+}
+.card-header {
+    padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+    margin-bottom: 0;
+    color: var(--bs-card-cap-color);
+    background-color: var(--bs-card-cap-bg);
+    border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
+}
+.border-radius-xl {
+    border-radius: 0.75rem;
+}
+.icon-lg {
+    width: 80px;
+    height: 64px;
+    padding-top: 8px;
+    color: white;
+}
+.icon-shape {
+    
+    background-position: center;
+    border-radius: 0.5rem;
+}
+.bg-gradient-dark {
+    background-image: linear-gradient(195deg, #42424a 0%, #191919 100%);
+}
+.shadow-dark {
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(64, 64, 64, 0.4) !important;
+}
+.text-center {
+    text-align: center !important;
+}
+.mt-n4 {
+    margin-top: -1.5rem !important;
+}
+.position-absolute {
+    position: absolute !important;
+}
+
+
+.text-end {
+    text-align: right !important;
+}
+.pt-1 {
+    padding-top: 0.25rem !important;
+}
+.text-sm {
+    font-size: 0.875rem !important;
+}
+.text-sm {
+    line-height: 1.5;
+}
+.text-capitalize {
+    text-transform: capitalize !important;
+}
+hr.horizontal.dark {
+    background-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4), transparent);
+}
+hr.horizontal {
+    background-color: transparent;
+}
+.card>hr {
+    margin-right: 0;
+    margin-left: 0;
+}
+.my-0 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+.card .card-footer {
+    padding: 1.5rem;
+    background-color: transparent;
+}
+.card-footer:last-child {
+    border-radius: 0 0 var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius);
+}
+.card-footer {
+    padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+    color: var(--bs-card-cap-color);
+    background-color: var(--bs-card-cap-bg);
+    border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
+}
+
+
 </style>
 
 </head>
 <body>
 	<div class="container">
-		<div class="row">
+	
+	
+	
+	<div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">Tổng đơn hàng</i>
+              </div>
+              <div class="text-end pt-1">
+                <h4 class="mb-0">53</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">Thành công: </span> 15</p>
+              <p class="mb-0"><span class="text-sm font-weight-bolder">Hủy: </span>3</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">Doanh thu ngày</i>
+              </div>
+              <div class="text-end pt-1">
+                <h4 class="mb-0">2,300</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>so với ngày hôm qua</p>
+              <p class="mb-0"><span class="text-sm font-weight-bolder"> &ensp;</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">Doanh thu tháng</i>
+              </div>
+              <div class="text-end pt-1">
+                <h4 class="mb-0">3,462</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> so với tháng trước</p>
+              <p class="mb-0"><span class="text-sm font-weight-bolder">&ensp; </span></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">Tổng doanh thu</i>
+              </div>
+              <div class="text-end pt-1">
+                <h4 class="mb-0">103,430</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">&ensp;</span></p>
+              <p class="mb-0"><span class="text-sm font-weight-bolder">&ensp;  </span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+		<!-- <div class="row">
 			<div class="col-sm-4" >
 				<div class="menten text-center" >
-					<h4 class="title">Tổng Doanh Thu</h4>
+					<h4 >Tổng Doanh Thu</h4>
 					<h3 class="mount">{{total}} VND</h3>
 				</div>
 			</div>
 
 			<div class="col-sm-4">
 				<div class="menten text-center">
-					<h4 class="title">Số lượng khách đã mua</h4>
+					<h4 >Số lượng khách đã mua</h4>
 					<h3 class="mount">{{account}}</h3>
 				</div>
 			</div>
 
 			<div class="col-sm-4 ">
 				<div class="menten text-center">
-					<h4 class="title">Tổng đơn hàng</h4>
+					<h4 >Tổng đơn hàng</h4>
 					<h3 class="mount">{{order}}</h3>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<hr />
 		<div class="row">
-			<div class="col-sm-4">
-				<h4 class="title">Thống kê doanh thu theo năm</h4>
-			</div>
-
 			<div class="col-sm-2  input-group-sm mb-3">
-				<h5 class="title">Tháng/năm:</h5>
+				<span >Ngày bắt đầu:</span>
+				<input type="text" id="fromdate" name="fromdate" value="{{fromdate}}" class="form-control" 
+				placeholder="dd/MM/yyyy"  style="width: 100%;"   ng-blur="checkKyThangInput('fromdate');" >
+			</div>
+			<div class="col-sm-2  input-group-sm mb-3">
+				<span >Ngày kết thúc:</span>
+				<input type="text" id="todate" name="todate" value="{{fromdate}}" class="form-control" 
+				placeholder="dd/MM/yyyy"  style="width: 100%;"   ng-blur="checkKyThangInput('todate');" >
+			</div>
+			<!-- <div class="col-sm-2  input-group-sm mb-3">
+				<span >Tháng/năm:</span>
 				<input type="text" id="namTke" name="namTke" value="{{namTke}}" class="form-control" 
 				placeholder="Nhập tháng năm!"  style="width: 120px;" ng-blur="checkKyThangInput('namTke');" >
-			</div>
-			<div class="form-group col-sm-2">
-				<h5 class="title">Loại giày thể thao:</h5>
-				<select ng-model="formProduct.category.shoeTypeId" id="categoySelect"
+			</div> -->
+			<div class="form-group col-sm-3">
+				<span >Loại giày:</span>
+				<select ng-model="formProduct.shoeType.shoeTypeId" id="categoySelect"
 					class="form-control form-control-sm">
 					<option value="">-- Chọn --</option>
-					<option ng-repeat="c in cates" ng-value="c.shoeTypeId">{{c.name}}</option>
+					<option ng-repeat="c in shoeType" ng-value="c.shoeTypeId">{{c.name}}</option>
 				</select>
 			</div>
-			<div class="form-group col-sm-2">
-				<h5 class="title">Hãng sản phẩm:</h5>
+			<div class="form-group col-sm-3">
+				<span >Hãng giày:</span>
 				<select ng-model="formProduct.brand.brandId" id="brandSelect"
 					class="form-control form-control-sm">
 					<option value="">-- Chọn --</option>
@@ -117,8 +317,8 @@
 				</select>
 			</div>
 			<div class="form-group col-sm-2">
-				<h5 class="title">&emsp;&emsp;&emsp;</h5>
-				<input type="button" style="width: 90px; margin-left: 10px; height: 31px;" value="Tìm kiếm" ng-click="searchdThu();" class="btn btn-info">
+				<span >&emsp;&emsp;&emsp;</span>
+				<input type="button" style="width: 90px; font-size: 12px;" value="Tìm kiếm" ng-click="searchdThu();" class="btn btn-info">
 			</div>
 		</div>
 		<div>
@@ -127,10 +327,14 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th scope="col">Mã sản phẩm</th>
-							<th scope="col">Tên sản phẩm</th>
-							<th scope="col">Loại giày thể thao</th>
-							<th scope="col">Hãng giày thể thao</th>
+							<th scope="col">Mã giày</th>
+							<th scope="col">Tên giày</th>
+							<th scope="col">Hãng giày</th>
+							<th scope="col">Loại giày</th>
+							<th scope="col">Đế giày</th>
+							<th scope="col">Phong cách</th>
+							<th scope="col">Màu sắc</th>
+							<th scope="col">Chất liệu</th>
 							<th scope="col">Số lượng mua</th>
 							<th scope="col">Tổng tiền</th>
 						</tr>
@@ -139,8 +343,12 @@
 						<tr ng-repeat="item in pager.itemsProduct">
 							<td>{{item.id}}</td>
 							<td>{{item.name}}</td>
-							<td>{{item.brand}}</td>
 							<td>{{item.cate}}</td>
+							<td>{{item.brand}}</td>
+							<td>{{item.brand}}</td>
+							<td>{{item.brand}}</td>
+							<td>{{item.brand}}</td>
+							<td>{{item.brand}}</td>
 							<td>{{item.quantity}}</td>
 							<td>{{item.total}} VND</td>
 						</tr>
@@ -171,7 +379,7 @@
 				<div class="">
 				
 				
-				<h4 class="title">Top sản phẩm được mua nhiều nhất</h4>
+				<!-- <h4 >Top sản phẩm được mua nhiều nhất</h4>
 				<div class="row" >
 					<div class="col-sm-4" ng-repeat="item in product">
 						<div class="khung">
@@ -187,8 +395,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<h4 class="title" style="margin-top: 10px;">Top tài khoản mua
+				</div> -->
+				<h4  style="margin-top: 10px;">Top tài khoản mua
 					nhiều nhất</h4>
 				<div class="row">
 					<div class="col-sm-4" ng-repeat="item in accountTop">
@@ -209,7 +417,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
 
 </body>
 </html>

@@ -157,140 +157,365 @@
 	color: white;
 }
 </style>
+<style>
+@media (min-width: 1200px) {
+    .container {
+        width: 100%;
+        margin: 0 auto;
+    }
+    }
+.index-banner .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.clearfix, .row {
+    zoom: 1;
+}
+.list-owl {
+    display: flex;
+    flex-wrap: wrap;
+}
+.list-owl > .item {
+    flex: 0 0 25%;
+}
+.list-owl .item {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.index-banner.style1 {
+    margin-bottom: 30px;
+}
+.index-banner a, .hover-effect {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.index-banner a img {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+.dt-width-100 {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+}
+.index-banner .caption {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    color: #000;
+    padding: 10px 0 0;
+    pointer-events: none;
+}
+.index-banner .caption i {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #da1d38;
+    display: none;
+}
+.index-banner .caption .caption-title {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21px;
+    letter-spacing: 0.2px;
+}
+.index-banner .caption .caption-sub {
+    font-size: 13px;
+    line-height: 16px;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #ccc;
+}
+a:hover {
+	text-decoration: none;
+	
+}
+.index-banner .hover-effect:hover .caption-title, .index-banner .hover-effect:hover .caption-title2, .index-banner .hover-effect:hover .caption-title3{color:#f23f3f;
+}
+
+.index-banner a img {
+    display: block;
+    width: 100%;
+}
+.dt-width-100 {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+.index-banner a .caption-title2 {
+    display: flex;
+    align-items: center;
+    margin: 5px 0 30px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 400;
+    line-height: 21px;
+}
+</style>
 </head>
 <body>
 	<div class="noidung" layout:fragment="content">
 		<!--content-->
 		<div class="content">
 			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		                <img id="img" style="width: 1320px;height: 416px;" onclick="changeImage()" src="https://product.hstatic.net/200000278317/product/bv-chon-giay-theo-vi-tri-10_76942288f8b14f4ea7d879b415c684a5.jpg" alt="">
+		            </div>
+		            <script>
+		                var index = 1;
+		                changeImage = function() {
+		
+		                    var imgs = [
+		                    	"https://file.hstatic.net/1000230642/collection/banner_2_33b49b046bba473d9b5cebf816988973.jpg",
+		                    	"https://mira.vn/upload/images/GALAXY%20S1%20BANNER1.png",
+		                    	"https://file.hstatic.net/1000061481/file/nike_new_lights_92b8afa1c82e4491879f90a5eb8e6d8c.jpg",
+		                    	"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMXNG2uycVPApQRp3XqU0Vd5nKUCWL2Q0zXQ&s"
+		                        
+		                    ];
+		                    document.getElementById("img").src = imgs[index];
+		                    index++;
+		                    if (index == 3) {
+		                        index = 0;
+		                    }
+		                }
+		                setInterval(changeImage, 3000);
+		            </script>
+				</div>
+			
 				<div class="content-top" style="padding-top: 50px;">
-					<h2>Hàng mới nhất</h2>
-					<div class="row dhn" style="margin-top: 10px;">
-						<a class="btn btn-secondary bg-danger"
-							th:href="@{|/4MEN/product/gender/nam|}"
-							style="margin-right: 20px;">GIÀY THỂ THAO NAM</a> <a
-							class="btn btn-secondary bg-danger"
-							th:href="@{|/4MEN/product/gender/nu|}">GIÀY THỂ THAO NỮ</a>
+					<h2>BẠN ĐANG TÌM</h2>
+				<div class="list-banner">
+		<div class="row">
+			<div class="list-owl">
+				<div class="item">
+					<div class="index-banner style1">
+						<a class="hover-effect" href="https://www.4MEN/collections/giay-co-nhan-tao" title="GIÀY CỎ NHÂN TẠO (ĐẾ TF)">
+							<img class="dt-width-100 lazyloaded" width="313" height="313" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_1.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_1.jpg?v=1858" alt="GIÀY CỎ NHÂN TẠO (ĐẾ TF)">
+							<div class="caption">
+								<i class="caption-icon" style="background:#da1d38 url('//theme.hstatic.net/1000061481/1001035882/14/icon_banner_1.png?v=1858') center center/18px no-repeat;"></i>
+								<h2 class="caption-title">GIÀY CỎ NHÂN TẠO (ĐẾ TF)</h2>
+								<span class="caption-sub">Giày đá bóng dành cho mặt sân cỏ nhân tạo 5-7 người</span>
+							</div>
+						</a>
 					</div>
-					<div class="grid-in">
-						<div class="col-md-4 grid-top" th:each="listpro : ${items}"
-							style="margin-bottom: 0px;">
-							<div class="thumbnail"
-								style="margin-bottom: 0px; padding-bottom: 0px;">
-								<a th:href="@{|4MEN/product/detail/${listpro.productId}|}"
-									class="b-link-stripe b-animate-go  thickbox"> <img
-									class="img-responsive"
-									th:src="@{|/assets/images/${listpro.image}|}" alt=""
-									style="width: 348px; height: 348px;">
-								</a>
+				</div>
+				<div class="item">
+					<div class="index-banner style1">
+						<a class="hover-effect" href="https://www.4MEN/collections/giay-co-tu-nhien" title="GIÀY CỎ TỰ NHIÊN (ĐẾ FG, AG, SG)">
+							<img class="dt-width-100 lazyloaded" width="313" height="313" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_2.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_2.jpg?v=1858" alt="GIÀY CỎ TỰ NHIÊN (ĐẾ FG, AG, SG)">
+							<div class="caption">
+								<i class="caption-icon" style="background:#da1d38 url('//theme.hstatic.net/1000061481/1001035882/14/icon_banner_2.png?v=1858') center center/18px no-repeat;"></i>
+								<h2 class="caption-title">GIÀY CỎ TỰ NHIÊN (ĐẾ FG, AG, SG)</h2>
+								<span class="caption-sub">Giày đá bóng dành cho mặt sân cỏ tự nhiên 11 người</span>
 							</div>
-
-							<div class="proName text-center">
-								<a class="link-danger"
-									th:href="@{|4MEN/product/detail/${listpro.productId}|}"
-									style="text-decoration: none; font-size: 20px; font-weight: 500;">
-									[[*{listpro.name}]] </a>
-
-								<div>[[*{listpro.brand.name}]] - [[*{listpro.gender} ?
-									'Nam':'Nữ']] - [[*{listpro.size.name}]] -
-									[[*{listpro.style.name}]]</div>
-
-							</div>
-							<div class="text-center" style="font-style: italic; color: red;"
-								th:if="${listpro.category.discount != null}">
-								<b>[[*{#numbers.formatInteger(listpro.price - (listpro.price
-									*
-									(listpro.category.discount.percentDiscount)/100),3,'POINT')}]]
-									đ</b>
-							</div>
-							<div class="text-center" style="font-style: italic; color: red;"
-								th:if="${listpro.category.discount == null}">
-								<b>[[*{#numbers.formatInteger(listpro.price ,3,'POINT')}]] đ</b>
-							</div>
-						</div>
+						</a>
 					</div>
-					<div class="clearfix"></div>
+				</div>
+				<div class="item">
+					<div class="index-banner style1">
+						<a class="hover-effect" href="https://www.4MEN/collections/giay-futsal" title="GIÀY FUTSAL (ĐẾ IC)">
+							<img class="dt-width-100 lazyloaded" width="313" height="313" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_3.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_3.jpg?v=1858" alt="GIÀY FUTSAL (ĐẾ IC)">
+							<div class="caption">
+								<i class="caption-icon" style="background:#da1d38 url('//theme.hstatic.net/1000061481/1001035882/14/icon_banner_3.png?v=1858') center center/18px no-repeat;"></i>
+								<h2 class="caption-title">GIÀY FUTSAL (ĐẾ IC)</h2>
+								<span class="caption-sub">Giày đá bóng dành cho sân xi măng và sân Futsal trong nhà</span>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="item">
+					<div class="index-banner style1">
+						<a class="hover-effect" href="https://4MEN/collections/giay-da-bong-gia-re" title="GIÀY ĐÁ BÓNG GIÁ RẺ">
+							<img class="dt-width-100 lazyloaded" width="313" height="313" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_4.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_4.jpg?v=1858" alt="GIÀY ĐÁ BÓNG GIÁ RẺ">
+							<div class="caption">
+								<i class="caption-icon" style="background:#da1d38 url('//theme.hstatic.net/1000061481/1001035882/14/icon_banner_4.png?v=1858') center center/18px no-repeat;"></i>
+								<h2 class="caption-title">GIÀY ĐÁ BÓNG GIÁ RẺ</h2>
+								<span class="caption-sub">Giày đá bóng chính hãng giá dưới 1.000.000vnd</span>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="clear-mobile-banner">
+			<div class="col-xs-6 col-sm-4 item">
+				<div class="index-banner style2">
+					<a class="hover-effect" href="https://www.4MEN/collections/giay-da-bong-tre-em" title="GIÀY ĐÁ BANH TRẺ EM">
+						<img class="dt-width-100 lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_5.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_5.jpg?v=1858" alt="GIÀY ĐÁ BANH TRẺ EM">
+						<h2 class="caption-title2">GIÀY ĐÁ BANH TRẺ EM<i class="fa fa-angle-right"></i></h2>
+					</a>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 item">
+				<div class="index-banner style2">
+					<a class="hover-effect" href="https://4MEN/collections/ao-bong-da-chinh-hang" title="ÁO BÓNG ĐÁ CHÍNH HÃNG">
+						<img class="dt-width-100 lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_6.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_6.jpg?v=1858" alt="ÁO BÓNG ĐÁ CHÍNH HÃNG">
+						<h2 class="caption-title2">ÁO BÓNG ĐÁ CHÍNH HÃNG<i class="fa fa-angle-right"></i></h2>
+					</a>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 item">
+				<div class="index-banner style2">
+					<a class="hover-effect" href="https://www.4MEN/collections/bong-da" title="QUẢ BÓNG ĐÁ">
+						<img class="dt-width-100 lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_7.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_7.jpg?v=1858" alt="QUẢ BÓNG ĐÁ">
+						<h2 class="caption-title2">QUẢ BÓNG ĐÁ<i class="fa fa-angle-right"></i></h2>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="clear-mobile-banner">
+			<div class="col-xs-6 col-sm-4 item">
+				<div class="index-banner style2">
+					<a class="hover-effect" href="https://www.4MEN/collections/boc-ong-dong" title="BẢO VỆ ỐNG ĐỒNG">
+						<img class="dt-width-100 lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_9.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_9.jpg?v=1858" alt="BẢO VỆ ỐNG ĐỒNG">
+						<h2 class="caption-title2">BẢO VỆ ỐNG ĐỒNG<i class="fa fa-angle-right"></i></h2>
+					</a>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 item">
+				<div class="index-banner style2">
+					<a class="hover-effect" href="https://4MEN/collections/phu-kien-ra-san" title="PHỤ KIỆN RA SÂN">
+						<img class="dt-width-100 lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_10.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_10.jpg?v=1858" alt="PHỤ KIỆN RA SÂN">
+						<h2 class="caption-title2">PHỤ KIỆN RA SÂN<i class="fa fa-angle-right"></i></h2>
+					</a>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 item">
+				<div class="index-banner style2">
+					<a class="hover-effect" href="https://www.4MEN/collections/vo-bong-da" title="VỚ BÓNG ĐÁ">
+						<img class="dt-width-100 lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_8.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/index_banner_8.jpg?v=1858" alt="VỚ BÓNG ĐÁ">
+						<h2 class="caption-title2">VỚ BÓNG ĐÁ<i class="fa fa-angle-right"></i></h2>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 				</div>
 
 
 				<div class="content-top-bottom">
-					<h2>Bộ sư tập nổi bật</h2>
-					<div class="col-md-6 men">
-						<a th:href="@{|/4MEN/brand/citizen|}"
-							class="b-link-stripe b-animate-go  thickbox"> <img
-							class="img-responsive" src="/assets/images/st1.jpg" alt=""
-							style="width: 540px; height: 428px;">
-						</a>
-
-
-					</div>
-					<div class="col-md-6">
-						<div class="col-md1 ">
-							<a th:href="@{|/4MEN/brand/ogival|}"
-								class="b-link-stripe b-animate-go  thickbox"><img
-								class="img-responsive" src="/assets/images/st2.jpg" alt="">
-							</a>
-
-						</div>
-						<div class="col-md2" style="margin-top: 4px;">
-							<div class="col-md-6 men1">
-								<a th:href="@{|/4MEN/brand/orient|}"
-									class="b-link-stripe b-animate-go  thickbox"><img
-									class="img-responsive" src="/assets/images/st3.jpg" alt="">
-									s </a>
-
-							</div>
-							<div class="col-md-6 men2">
-								<a th:href="@{|/4MEN/brand/thachanh|}"
-									class="b-link-stripe b-animate-go  thickbox"><img
-									class="img-responsive" src="/assets/images/st4.jpg" alt=""
-									style="height: 144px;"> </a>
-
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<!---->
-				<div class="content-bot-bottom">
-					<h2>Bài viết mới</h2>
-					<!-- thay đổi img-responsive-new -->
-					<div class="grid-in">
-						<ul>
-							<div th:each="p:${news}" class="col-md-4 grid_3">
-								<a th:href="@{|/4MEN/blog/${p.newsId}|}"><img
-									style="height: 350px; width: 350px;"
-									th:src="@{|/assets/images/${p.image}/|}"
-									class="img-responsive-new"
-									th:href="@{|/4MEN/blog/${p.newsId}|}" /></a>
-								<h3 style="margin-top: 10px;">
-									<a th:href="@{|/4MEN/blog/${p.newsId}|}">[[${p.title}]]</a>
-								</h3>
-								<p th:utext="${p.shortcontent}"></p>
-							</div>
-						</ul>
-					</div>
+					<div class="index-banner">
+	<div class="index-title text-center"><h2>THƯƠNG HIỆU</h2></div>
+	<div class="list-banner row" id="clear-mobile-banner">
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://www.4MEN/collections/giay-da-banh-nike" title="GIÀY ĐÁ BANH NIKE">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_1.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_1.jpg?v=1858" alt="GIÀY ĐÁ BANH NIKE">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH NIKE<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://www.4MEN/collections/giay-da-banh-adidas" title="GIÀY ĐÁ BANH ADIDAS">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_2.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_2.jpg?v=1858" alt="GIÀY ĐÁ BANH ADIDAS">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH ADIDAS<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://www.4MEN/collections/giay-da-banh-puma" title="GIÀY ĐÁ BANH PUMA">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_3.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_3.jpg?v=1858" alt="GIÀY ĐÁ BANH PUMA">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH PUMA<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://www.4MEN/collections/giay-da-banh-mizuno" title="GIÀY ĐÁ BANH MIZUNO">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_4.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_4.jpg?v=1858" alt="GIÀY ĐÁ BANH MIZUNO">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH MIZUNO<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://www.4MEN/collections/giay-da-banh-asics" title="GIÀY ĐÁ BANH ASICS">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_5.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_5.jpg?v=1858" alt="GIÀY ĐÁ BANH ASICS">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH ASICS<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://www.4MEN/collections/giay-da-banh-kamito" title="GIÀY ĐÁ BANH KAMITO">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_6.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_6.jpg?v=1858" alt="GIÀY ĐÁ BANH KAMITO">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH KAMITO<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://4MEN/collections/giay-da-banh-grandsport" title="GIÀY ĐÁ BANH GRANDSPORT">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_7.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_7.jpg?v=1858" alt="GIÀY ĐÁ BANH GRANDSPORT">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH GRANDSPORT<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://4MEN/collections/giay-da-banh-x-munich" title="GIÀY ĐÁ BANH X MUNICH">
+					<img class="dt-width-100 lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_8.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_8.jpg?v=1858" alt="GIÀY ĐÁ BANH X MUNICH">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH X MUNICH<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://4MEN/collections/giay-da-banh-joma" title="GIÀY ĐÁ BANH JOMA">
+					<img class="dt-width-100 lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_9.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_9.jpg?v=1858" alt="GIÀY ĐÁ BANH JOMA">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH JOMA<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://4MEN/collections/giay-da-banh-desporte" title="GIÀY ĐÁ BANH DESPORTE">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_10.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_10.jpg?v=1858" alt="GIÀY ĐÁ BANH DESPORTE">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH DESPORTE<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://4MEN/collections/giay-da-banh-zocker" title="GIÀY ĐÁ BANH ZOCKER">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_11.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_11.jpg?v=1858" alt="GIÀY ĐÁ BANH ZOCKER">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH ZOCKER<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4 ">
+			<div class="index-banner style2">
+				<a class="hover-effect" href="https://4MEN/collections/giay-da-banh-nms" title="GIÀY ĐÁ BANH NMS">
+					<img class="dt-width-100 ls-is-cached lazyloaded" width="423" height="148" src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_12.jpg?v=1858" data-src="//theme.hstatic.net/1000061481/1001035882/14/brand_banner_12.jpg?v=1858" alt="GIÀY ĐÁ BANH NMS">
+					<h2 class="caption-title2">GIÀY ĐÁ BANH NMS<i class="fa fa-angle-right"></i></h2>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+					
+					
+					
+					
 				</div>
 			</div>
-			<div class="text-center"
-				style="color: black; margin-bottom: 20%; margin-top: 10px;">
-				<h2>THƯƠNG HIỆU NỔI TIẾNG</h2>
-				<div class="col-sm-1" th:each="brand : ${brands}"
-					style="margin-top: 20px; margin-bottom: 10px;">
-					<a th:href="@{|/4MEN/brand/${brand.name}|}"
-						style="text-decoration: none; font-size: 13px;"><img
-						style="height: 90px; width: 90px; margin-top: 30px;"
-						th:src="@{|/assets/images/${brand.image}/|}"
-						th:href="@{|/4MEN/brand/${brand.brandId}|}" /></a>
-
-				</div>
-
-			</div>
-
-
 		</div>
 	</div>
 </body>
+
 
 </html>

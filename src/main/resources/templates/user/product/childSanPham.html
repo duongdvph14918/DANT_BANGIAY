@@ -13,13 +13,13 @@
                         <div id="listProduct" class="col-md-3 mt-4" th:each="listpro : ${listproduct}" style="margin-bottom: 20px;">
                             <div style="height: 330px;">
                                 <div class="card" style="width: 18rem; height: 322px;">
-                                    <a th:href="@{|/4MEN/product/detail/${listpro.productId}|}" style="text-decoration: none;">
+                                    <a th:href="@{|/4MEN/product/detail/${listpro.productDetailId}|}" style="text-decoration: none;">
                                         <div class="thumbnail" style="margin-bottom: 0px; padding-bottom: 0px;">
-                                            <img class="card-img-top" th:src="@{|/assets/images/${listpro.image}|}" alt="" style="height: 178px; width: 178px;">
-                                            <div class="discount-label green" th:if="${listpro.category.discount != null}">
-                                                <p>-[[${listpro.category.discount.percentDiscount}]]%</p>
+                                            <img class="card-img-top" th:src="@{|/assets/images/${listpro.product.images}|}" alt="" style="height: 178px; width: 178px;">
+                                            <div class="discount-label green" th:if="${listpro.discount != null}">
+                                                <p>-[[${listpro.discount.percentDiscount}]]%</p>
                                             </div>
-                                            <input id="percent" type="hidden" th:value="${listpro.category.discount.percentDiscount}" th:if="${listpro.category.discount != null}"></input>
+                                            <input id="percent" type="hidden" th:value="${listpro.discount.percentDiscount}" th:if="${listpro.discount != null}"></input>
                                         </div>
                                         <div class="card-body" style="text-align: center;">
                                             <div>
@@ -27,13 +27,13 @@
                                                 <input type="hidden" name="nameProduct" th:value="${listpro.name}" />
                                             </div>
                                             <div style="color: gray;">[[*{listpro.brand.name}]] - [[*{listpro.size.name}]] - [[*{listpro.style.name}]] </div>
-                                            <div style="margin-bottom: 10px;" th:if="${listpro.category.discount != null}">
+                                            <div style="margin-bottom: 10px;" th:if="${listpro.discount != null}">
                                                 <p class="giagoc">&nbsp;<del>[[*{#numbers.formatInteger(listpro.price,3,'POINT')}]] <span>đ</span></del></p>
-                                                <p name="priceGiam" class="giamgia" style="font-size: 18px;">[[*{#numbers.formatInteger(listpro.price - (listpro.price *(listpro.category.discount.percentDiscount)/100),3,'POINT')}]] đ</p>
+                                                <p name="priceGiam" class="giamgia" style="font-size: 18px;">[[*{#numbers.formatInteger(listpro.price - (listpro.price *(listpro.discount.percentDiscount)/100),3,'POINT')}]] đ</p>
                                                 <input id="initPrice" name="initPrice" type="hidden" th:value="${listpro.price}" />
                                                 <input id="lastPrice" name="lastPrice" type="hidden" value=""></input>
                                             </div>
-                                            <div style="margin-bottom: 10px;" th:if="${listpro.category.discount == null}">
+                                            <div style="margin-bottom: 10px;" th:if="${listpro.discount == null}">
                                                 <p style="font-size: 15px; color: black;" >&nbsp;[[*{#numbers.formatInteger(listpro.price,3,'POINT')}]] <span>đ</span></p>
                                                 <!-- <p style="font-size: 18px;">&nbsp; <b>935000000<span> đ</span></b></p> -->
                                                 <input id="initPrice" type="hidden" th:value="${listpro.price}" />

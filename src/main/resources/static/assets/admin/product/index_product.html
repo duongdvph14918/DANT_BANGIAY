@@ -112,8 +112,13 @@ body {
 
 			<div id="menu1" class="container tab-pane card">
 				<div class="d-flex pt-2 mt-2 mb-2">
-					
-					<div class="col-sm-12">
+					<div class="col-sm-4 text-center ">
+						<label for="image"> <img alt=""
+							src="/assets/images/{{form.image}}" class="img-rounded" width="304"
+							height="236">
+						</label>
+					</div>
+					<div class="col-sm-7">
 						<div class="row">
 							<div class="form-group col-sm-6">
 								<div>Mã sản phẩm:</div>
@@ -147,6 +152,10 @@ body {
 										name="available" type="radio">Ngừng bán
 									</label>
 								</div>
+							</div>
+							<div class="form-group col-sm-12">
+								<label>Ảnh</label> <input type="file" id="chonAnh"
+									class="form-control-file  border" onchange="angular.element(this).scope().imageChanged(this.files)">
 							</div>
 						</div>
 						

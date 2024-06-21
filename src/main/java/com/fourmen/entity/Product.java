@@ -32,6 +32,8 @@ public class Product implements Serializable{
 	private String description;
 	private boolean status;
 	
+	private String image;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "product")
 	private List<ImageProduct> images;
@@ -40,9 +42,8 @@ public class Product implements Serializable{
 	@JoinColumn(name = "brandId")
 	private Brand brand;
 	
-	
-	
-	public Product(int productId, String productCode, String name, String description, boolean status,
+
+	public Product(int productId, String productCode, String name, String description, boolean status, String image,
 			List<ImageProduct> images, Brand brand) {
 		super();
 		this.productId = productId;
@@ -50,11 +51,24 @@ public class Product implements Serializable{
 		this.name = name;
 		this.description = description;
 		this.status = status;
+		this.image = image;
 		this.images = images;
 		this.brand = brand;
 	}
 
-	
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
 
 	public String getProductCode() {
 		return productCode;

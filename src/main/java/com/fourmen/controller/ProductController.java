@@ -3,6 +3,8 @@ package com.fourmen.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fourmen.entity.Brand;
 import com.fourmen.entity.Color;
 import com.fourmen.entity.Product;
+import com.fourmen.entity.ProductDetail;
 import com.fourmen.entity.ShoeType;
 import com.fourmen.entity.Size;
 import com.fourmen.entity.UserAcounts;
@@ -24,6 +27,7 @@ import com.fourmen.service.BrandService;
 import com.fourmen.service.ColorService;
 import com.fourmen.service.FeedbackService;
 import com.fourmen.service.ImageProductService;
+import com.fourmen.service.ProductDetailService;
 import com.fourmen.service.ProductService;
 import com.fourmen.service.ShoeTypeService;
 import com.fourmen.service.SizeService;
@@ -39,6 +43,9 @@ public class ProductController {
 
 	@Autowired
 	public  ProductService productService;
+	
+	@Autowired
+	public  ProductDetailService productDetailService;
 	
 	@Autowired
 	ImageProductService imageProductService;
@@ -60,37 +67,34 @@ public class ProductController {
 		double price2 = 0;
 		private Page<Product> products;
 		String the;
-	public void dulieu() {
-		 categories = shoeTypeService.findAll();
-		 brands = brandService.findAll();
-		 productBest = productService.findTop2();
-		 colors = colorService.findAll();
-		 sizes = sizeSV.findAll();
+	public void dulieu(HttpServletRequest request,Model model) {
+		 HomeController homeme= new HomeController();
+		 homeme.innitBrandsCate(request, model);
 	}
 	
 	//search color
 	@GetMapping("4MEN/product/color/{value}")
-	public String searchColor(Model model,@PathVariable("value") Long color, @RequestParam("p") Optional<Integer> p ) {
-		dulieu();
+	public String searchColor(HttpServletRequest request,Model model,@PathVariable("value") Long color, @RequestParam("p") Optional<Integer> p ) {
+		dulieu(request,model);
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
 		Page<Product> products;
-		products = productService.getProductByColor(color, pageable);
-		if (products.isEmpty()) {
-			model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp với tiêu chí bạn chọn!");
-			model.addAttribute("listproduct", products);
-		} else {
-			model.addAttribute("listproduct", products);
-		}
-		model.addAttribute("pric", color);
-		model.addAttribute("brands", brands);
-		model.addAttribute("colors", colors);
-		model.addAttribute("sizes",sizes);
-		model.addAttribute("listShoeType", categories);
-		model.addAttribute("productBest", productBest);
-		model.addAttribute("number",products.getNumber());
-		model.addAttribute("totalPages",products.getTotalPages());
-		model.addAttribute("totalElements",products.getTotalElements());
-		model.addAttribute("size",products.getSize());
+		//products = productService.getProductByColor(color, pageable);
+//		if (products.isEmpty()) {
+//			model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp với tiêu chí bạn chọn!");
+//			model.addAttribute("listproduct", products);
+//		} else {
+//			model.addAttribute("listproduct", products);
+//		}
+//		model.addAttribute("pric", color);
+//		model.addAttribute("brands", brands);
+//		model.addAttribute("colors", colors);
+//		model.addAttribute("sizes",sizes);
+//		model.addAttribute("listShoeType", categories);
+//		model.addAttribute("productBest", productBest);
+//		model.addAttribute("number",products.getNumber());
+//		model.addAttribute("totalPages",products.getTotalPages());
+//		model.addAttribute("totalElements",products.getTotalElements());
+//		model.addAttribute("size",products.getSize());
 		return "/user/product/childSanPham";
 	}
 	
@@ -98,53 +102,53 @@ public class ProductController {
 	//seacher price
 	@GetMapping("4MEN/product/price/{value}")
 	public String searchPrice(Model model,@PathVariable("value") String pric, @RequestParam("p") Optional<Integer> p) {
-		dulieu();
+		////dulieu();
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
 		Page<Product> products;
 		checkprice(pric);
-		products = productService.searchBCP1(price1, price2, pageable);
-		if (products.isEmpty()) {
-			model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp với tiêu chí bạn chọn!");
-			model.addAttribute("listproduct", products);
-		} else {
-			model.addAttribute("listproduct", products);
-		}
-		model.addAttribute("pric", pric);
-		model.addAttribute("brands", brands);
-		model.addAttribute("colors", colors);
-		model.addAttribute("sizes",sizes);
-		model.addAttribute("listShoeType", categories);
-		model.addAttribute("productBest", productBest);
-		model.addAttribute("number",products.getNumber());
-		model.addAttribute("totalPages",products.getTotalPages());
-		model.addAttribute("totalElements",products.getTotalElements());
-		model.addAttribute("size",products.getSize());
+//		products = productService.searchBCP1(price1, price2, pageable);
+//		if (products.isEmpty()) {
+//			model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp với tiêu chí bạn chọn!");
+//			model.addAttribute("listproduct", products);
+//		} else {
+//			model.addAttribute("listproduct", products);
+//		}
+//		model.addAttribute("pric", pric);
+//		model.addAttribute("brands", brands);
+//		model.addAttribute("colors", colors);
+//		model.addAttribute("sizes",sizes);
+//		model.addAttribute("listShoeType", categories);
+//		model.addAttribute("productBest", productBest);
+//		model.addAttribute("number",products.getNumber());
+//		model.addAttribute("totalPages",products.getTotalPages());
+//		model.addAttribute("totalElements",products.getTotalElements());
+//		model.addAttribute("size",products.getSize());
 		return "/user/product/childSanPham";
 	}
 	
 	//search size
 	@GetMapping("4MEN/product/size/{value}")
 	public String searchSize(Model model,@PathVariable("value") Long pric, @RequestParam("p") Optional<Integer> p) {
-		dulieu();
+		//dulieu();
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
 		Page<Product> products;
-		products = productService.getProductBySize(pric, pageable);
-		if (products.isEmpty()) {
-			model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp với tiêu chí bạn chọn!");
-			model.addAttribute("listproduct", products);
-		} else {
-			model.addAttribute("listproduct", products);
-		}
-		model.addAttribute("pric", pric);
-		model.addAttribute("brands", brands);
-		model.addAttribute("colors", colors);
-		model.addAttribute("sizes",sizes);
-		model.addAttribute("listShoeType", categories);
-		model.addAttribute("productBest", productBest);
-		model.addAttribute("number",products.getNumber());
-		model.addAttribute("totalPages",products.getTotalPages());
-		model.addAttribute("totalElements",products.getTotalElements());
-		model.addAttribute("size",products.getSize());
+//		products = productService.getProductBySize(pric, pageable);
+//		if (products.isEmpty()) {
+//			model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp với tiêu chí bạn chọn!");
+//			model.addAttribute("listproduct", products);
+//		} else {
+//			model.addAttribute("listproduct", products);
+//		}
+//		model.addAttribute("pric", pric);
+//		model.addAttribute("brands", brands);
+//		model.addAttribute("colors", colors);
+//		model.addAttribute("sizes",sizes);
+//		model.addAttribute("listShoeType", categories);
+//		model.addAttribute("productBest", productBest);
+//		model.addAttribute("number",products.getNumber());
+//		model.addAttribute("totalPages",products.getTotalPages());
+//		model.addAttribute("totalElements",products.getTotalElements());
+//		model.addAttribute("size",products.getSize());
 		return "/user/product/childSanPham";
 	}
 	
@@ -152,20 +156,20 @@ public class ProductController {
 	@GetMapping("/4MEN/search")
 	public String Search(Model model, @RequestParam("nameSearch") String name, Optional<Integer> p) {
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);	
-		dulieu();
-		Page<Product> page = productService.findSearch(name,pageable);
-		model.addAttribute("listproduct", page);
-		model.addAttribute("brands", brands);
-		model.addAttribute("colors", colors);
-		model.addAttribute("sizes",sizes);
-		model.addAttribute("listShoeType", categories);
-		model.addAttribute("productBest", productBest);
-		model.addAttribute("number",page.getNumber());
-		model.addAttribute("totalPages",page.getTotalPages());
-		model.addAttribute("totalElements",page.getTotalElements());
-		model.addAttribute("size",page.getSize());
-		System.out.println("toanf 09876: "+page.getSize());
-		model.addAttribute("name",name);
+		//dulieu();
+//		Page<Product> page = productService.findSearch(name,pageable);
+//		model.addAttribute("listproduct", page);
+//		model.addAttribute("brands", brands);
+//		model.addAttribute("colors", colors);
+//		model.addAttribute("sizes",sizes);
+//		model.addAttribute("listShoeType", categories);
+//		model.addAttribute("productBest", productBest);
+//		model.addAttribute("number",page.getNumber());
+//		model.addAttribute("totalPages",page.getTotalPages());
+//		model.addAttribute("totalElements",page.getTotalElements());
+//		model.addAttribute("size",page.getSize());
+//		System.out.println("toanf 09876: "+page.getSize());
+//		model.addAttribute("name",name);
 		return "/user/product/childSanPham";
 	}
 	@Autowired
@@ -173,11 +177,10 @@ public class ProductController {
 	
 	// Product
 	@GetMapping("/4MEN/product")
-	public String sanpham(Model model, @RequestParam("p") Optional<Integer> p) {
-	
+	public String sanpham(HttpServletRequest request,Model model, @RequestParam("p") Optional<Integer> p) {
 			Pageable pageable = PageRequest.of(p.orElse(0), 8);
-			dulieu();
-			Page<Product> page = productService.findAll(pageable);
+			dulieu(request,model);
+			Page<ProductDetail> page = productDetailService.findAll(pageable);
 			model.addAttribute("listproduct", page);
 			model.addAttribute("brands", brands);
 			model.addAttribute("colors", colors);
@@ -197,37 +200,37 @@ public class ProductController {
 	@GetMapping({"/4MEN/product/{id}"})
 	public String loaiSp(Model model, @PathVariable("id") Integer id, @RequestParam("p") Optional<Integer> p) {
 		//System.out.println("id: " + id);
-		dulieu();
+		//dulieu();
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
-		Page<Product> page = productService.selectProductSpIdShoeType(id, pageable);
-		model.addAttribute("listproduct", page);
-		model.addAttribute("brands", brands);
-		model.addAttribute("colors", colors);
-		model.addAttribute("sizes",sizes);
-		model.addAttribute("listShoeType", categories);
-		model.addAttribute("productBest", productBest);
-		model.addAttribute("number",page.getNumber());
-		model.addAttribute("totalPages",page.getTotalPages());
-		model.addAttribute("totalElements",page.getTotalElements());
-		model.addAttribute("size",page.getSize());
-		System.out.println("toanf 09876: "+page.getSize());
+//		Page<Product> page = productService.selectProductSpIdShoeType(id, pageable);
+//		model.addAttribute("listproduct", page);
+//		model.addAttribute("brands", brands);
+//		model.addAttribute("colors", colors);
+//		model.addAttribute("sizes",sizes);
+//		model.addAttribute("listShoeType", categories);
+//		model.addAttribute("productBest", productBest);
+//		model.addAttribute("number",page.getNumber());
+//		model.addAttribute("totalPages",page.getTotalPages());
+//		model.addAttribute("totalElements",page.getTotalElements());
+//		model.addAttribute("size",page.getSize());
+//		System.out.println("toanf 09876: "+page.getSize());
 		return "/user/product/childSanPham";
 	}
 	
 	@GetMapping({"/4MEN/brand/{name}"})
 	public String thuonghieu(Model model, @PathVariable("name") String name, @RequestParam("p") Optional<Integer> p) {
 //		System.out.println("id: " + id);
-		dulieu();
+		//dulieu();
 		for(Brand b : brands) {
 			if(name.equalsIgnoreCase(b.getName())) {
 				Pageable pageable = PageRequest.of(p.orElse(0), 8);
-				Page<Product> page = productService.selectProductSpThongHieu(b.getBrandId(), pageable);
-				model.addAttribute("listproduct", page);
-				model.addAttribute("number",page.getNumber());
-				model.addAttribute("totalPages",page.getTotalPages());
-				model.addAttribute("totalElements",page.getTotalElements());
-				model.addAttribute("size",page.getSize());
-				System.out.println("list product by brand: "+page.getSize());
+//				Page<Product> page = productService.selectProductSpThongHieu(b.getBrandId(), pageable);
+//				model.addAttribute("listproduct", page);
+//				model.addAttribute("number",page.getNumber());
+//				model.addAttribute("totalPages",page.getTotalPages());
+//				model.addAttribute("totalElements",page.getTotalElements());
+//				model.addAttribute("size",page.getSize());
+//				System.out.println("list product by brand: "+page.getSize());
 			}
 		}
 //		Pageable pageable = PageRequest.of(p.orElse(0), 8);
@@ -249,7 +252,7 @@ public class ProductController {
 	@GetMapping({"/4MEN/shoeType/{id}"})
 	public String loaisp2(Model model, @PathVariable("id") String id, @RequestParam("p") Optional<Integer> p) {
 		System.out.println("id: " + id);
-		dulieu();
+		//dulieu();
 		products = null;
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
 		Page<Product> page = selectAllshoeTypeName(pageable,id);
@@ -275,7 +278,7 @@ public class ProductController {
 	@PostMapping("/4MEN/product/search")
 	public String search(Model model, @RequestParam("bran") String bran, @RequestParam("cate") String cate,
 			@RequestParam("pric") String pric, @RequestParam("p") Optional<Integer> p) {
-		dulieu();
+		//dulieu();
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
 		Page<Product> products;
 		int brandId;
@@ -284,39 +287,39 @@ public class ProductController {
 			products = productService.findAll(pageable);
 		} else if (cate == "" && bran == "" && pric != "") {
 			checkprice(pric);
-			products = productService.searchBCP1(price1, price2, pageable);
+			//products = productService.searchBCP1(price1, price2, pageable);
 		} else if (cate == "" && bran != "" && pric == "") {
 			brandId = Integer.parseInt(bran);
 			checkprice(pric);
-			products = productService.searchBCP6(brandId, pageable);
+			//products = productService.searchBCP6(brandId, pageable);
 		} else if (cate != "" && bran == "" && pric == "") {
 			shoeTypeId = Integer.parseInt(cate);
-			products = productService.searchBCP3(shoeTypeId, pageable);
+			//products = productService.searchBCP3(shoeTypeId, pageable);
 		} else if (cate != "" && bran != "" && pric == "") {
 			brandId = Integer.parseInt(bran);
 			shoeTypeId = Integer.parseInt(cate);
-			products = productService.searchBCP4(brandId, shoeTypeId, pageable);
+			//products = productService.searchBCP4(brandId, shoeTypeId, pageable);
 		} else if (cate == "" && bran != "" && pric != "") {
 			brandId = Integer.parseInt(bran);
 			checkprice(pric);
-			products = productService.searchBCP5(brandId, price1, price2, pageable);
+			//products = productService.searchBCP5(brandId, price1, price2, pageable);
 		} else if (cate != "" && bran == "" && pric != "") {
 			shoeTypeId = Integer.parseInt(cate);
 			checkprice(pric);
-			products = productService.searchBCP2(shoeTypeId, price1, price2, pageable);
+			//products = productService.searchBCP2(shoeTypeId, price1, price2, pageable);
 		} else {
 			checkprice(pric);
 			brandId = Integer.parseInt(bran);
 			shoeTypeId = Integer.parseInt(cate);
-			products = productService.searchBCP(brandId, shoeTypeId, price1, price2, pageable);
+			//products = productService.searchBCP(brandId, shoeTypeId, price1, price2, pageable);
 		}
-		System.out.println("listProduc:  " + products.isEmpty());
-		if (products.isEmpty()) {
-			model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp với tiêu chí bạn chọn!");
-			model.addAttribute("listproduct", products);
-		} else {
-			model.addAttribute("listproduct", products);
-		}
+		//System.out.println("listProduc:  " + products.isEmpty());
+//		if (products.isEmpty()) {
+//			model.addAttribute("message", "Không tìm thấy sản phẩm nào phù hợp với tiêu chí bạn chọn!");
+//			model.addAttribute("listproduct", products);
+//		} else {
+//			model.addAttribute("listproduct", products);
+//		}
 		model.addAttribute("bran", bran);
 		model.addAttribute("cate", cate);
 		model.addAttribute("pric", pric);
@@ -325,16 +328,16 @@ public class ProductController {
 		model.addAttribute("sizes",sizes);
 		model.addAttribute("listShoeType", categories);
 		model.addAttribute("productBest", productBest);
-		model.addAttribute("number",products.getNumber());
-		model.addAttribute("totalPages",products.getTotalPages());
-		model.addAttribute("totalElements",products.getTotalElements());
-		model.addAttribute("size",products.getSize());
-		System.out.println("toanf 09876: "+products.getSize());
+//		model.addAttribute("number",products.getNumber());
+//		model.addAttribute("totalPages",products.getTotalPages());
+//		model.addAttribute("totalElements",products.getTotalElements());
+//		model.addAttribute("size",products.getSize());
+//		System.out.println("toanf 09876: "+products.getSize());
 		return "/user/product/childSanPham";
 	}
 	@GetMapping("4MEN/product/gender/{gender}")
 	public String productGender(@RequestParam("p") Optional<Integer> p,Model model,@PathVariable("gender") String param) {
-		dulieu();
+		//dulieu();
 		Long gender;
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
 		if(param.equalsIgnoreCase("nam")) {
@@ -342,7 +345,7 @@ public class ProductController {
 		}else {
 			gender = 0L;
 		}
-		Page<Product> products = productService.findByGender(gender,pageable);
+		//Page<Product> products = productService.findByGender(gender,pageable);
 		if (products.isEmpty()) {
 			model.addAttribute("message", "Không tìm thấy sản phẩm nào!");
 			model.addAttribute("listproduct", products);
@@ -364,9 +367,9 @@ public class ProductController {
 	}
 	@GetMapping("4MEN/product/khuyenmai")
 	public String phobien(Model model, @RequestParam("p") Optional<Integer> p) {
-		dulieu();
+		//dulieu();
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
-		Page<Product> products = productService.selectRandom1(pageable);
+		//Page<Product> products = productService.selectRandom1(pageable);
 		if (products.isEmpty()) {
 			model.addAttribute("message", "Không có sản phẩm nào đang khuyến mãi!");
 			model.addAttribute("listproduct", products);
@@ -389,9 +392,9 @@ public class ProductController {
 
 	@GetMapping("4MEN/product/banchay")
 	public String banchay(Model model, @RequestParam("p") Optional<Integer> p) {
-		dulieu();
+		//dulieu();
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
-		Page<Product> products = productService.selectBanChayNhat(pageable);
+		//Page<Product> products = productService.selectBanChayNhat(pageable);
 		if (products.isEmpty()) {
 			model.addAttribute("message", "Không tìm thấy sản phẩm nào!");
 			model.addAttribute("listproduct", products);
@@ -414,9 +417,9 @@ public class ProductController {
 
 	@GetMapping("4MEN/product/moinhat")
 	public String moinhat(Model model, @RequestParam("p") Optional<Integer> p) {
-		dulieu();
+		//dulieu();
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
-		Page<Product> products = productService.selectDateNew(pageable);
+		//Page<Product> products = productService.selectDateNew(pageable);
 		if (products.isEmpty()) {
 			model.addAttribute("message", "Không tìm thấy sản phẩm nào!");
 			model.addAttribute("listproduct", products);
@@ -440,7 +443,7 @@ public class ProductController {
 	
 	@GetMapping("/4MEN/product/tags/{id}")
 	public String tags(Model model, @RequestParam("p") Optional<Integer> p,@PathVariable("id") String id) {
-		dulieu();
+		//dulieu();
 		Pageable pageable = PageRequest.of(p.orElse(0), 8);
 		products = null;
 		selectAllProperties(pageable,id);
@@ -483,7 +486,7 @@ public class ProductController {
 				"/4MEN/brand/detail/{id}","/4MEN/shoeType/detail/{id}","/4MEN/product/price/detail/{id}",
 				"/4MEN/product/color/detail/{id}","/4MEN/account/detail/{id}","/chitietDH/4MEN/product/detail/{id}"})
 			public String chitietSp(Model model ,@PathVariable("id") Integer id) {
-				dulieu();
+				//dulieu();
 				Product item = productService.getById(id);
 				model.addAttribute("item", item);
 //				
@@ -537,78 +540,78 @@ public class ProductController {
 		return the;
 	}
 	private Page<Product> selectAllshoeTypeName(Pageable pageable, String id) {
-		if(id.equals("quandoi")) {
-			String cate = "Đồng hồ quân đội";
-			products = productService.selectProductSpLoai2(cate,pageable);
-		}
-		if(id.equals("rolex")) {
-			String cate = "Đồng hồ Rolex";
-			products = productService.selectProductSpLoai2(cate,pageable);
-		}
-		if(id.equals("thethao")) {
-			String cate = "Đồng hồ thể thao";
-			products = productService.selectProductSpLoai2(cate,pageable);
-		}
-		if(id.equals("thongminh")) {
-			String cate = "Đồng hồ thông minh";
-			products = productService.selectProductSpLoai2(cate,pageable);
-		}
-		if(id.equals("thachanh")) {
-			String cate = "Đồng hồ thạch anh";
-			products = productService.selectProductSpLoai2(cate,pageable);
-		}
-		if(id.equals("dientu")) {
-			String cate = "giày thể thao Điện Tử";
-			products = productService.selectProductSpLoai2(cate,pageable);
-		}
-		if(id.equals("co")) {
-			String cate = "giày thể thao Cơ";
-			products = productService.selectProductSpLoai2(cate,pageable);
-		}
-		if(id.equals("hybrid")) {
-			String cate = "Hybrid Watch";
-			products = productService.selectProductSpLoai2(cate,pageable);
-		}	
+//		if(id.equals("quandoi")) {
+//			String cate = "Đồng hồ quân đội";
+//			products = productService.selectProductSpLoai2(cate,pageable);
+//		}
+//		if(id.equals("rolex")) {
+//			String cate = "Đồng hồ Rolex";
+//			products = productService.selectProductSpLoai2(cate,pageable);
+//		}
+//		if(id.equals("thethao")) {
+//			String cate = "Đồng hồ thể thao";
+//			products = productService.selectProductSpLoai2(cate,pageable);
+//		}
+//		if(id.equals("thongminh")) {
+//			String cate = "Đồng hồ thông minh";
+//			products = productService.selectProductSpLoai2(cate,pageable);
+//		}
+//		if(id.equals("thachanh")) {
+//			String cate = "Đồng hồ thạch anh";
+//			products = productService.selectProductSpLoai2(cate,pageable);
+//		}
+//		if(id.equals("dientu")) {
+//			String cate = "giày thể thao Điện Tử";
+//			products = productService.selectProductSpLoai2(cate,pageable);
+//		}
+//		if(id.equals("co")) {
+//			String cate = "giày thể thao Cơ";
+//			products = productService.selectProductSpLoai2(cate,pageable);
+//		}
+//		if(id.equals("hybrid")) {
+//			String cate = "Hybrid Watch";
+//			products = productService.selectProductSpLoai2(cate,pageable);
+//		}	
 		return products;
 	}
 	private Page<Product> selectAllProperties(Pageable pageable, String id) {
-		if(id.equals("mautrang")) {
-			String color = "Trắng";
-			products = productService.selectAllColor(color,pageable);
-		}else if(id.equals("mauvang")) {
-			String color = "Vàng";
-			products = productService.selectAllColor(color,pageable);
-		}else if(id.equals("mauden")){
-			String color = "Đen";
-			products = productService.selectAllColor(color,pageable);
-		}else if(id.equals("mauxanh")){
-			String color = "Xanh";
-			products = productService.selectAllColor(color,pageable);
-		}else if(id.equals("3atm")){
-			String material = "3 ATM";
-			products = productService.selectAllMaterialfoop(material,pageable);
-		}else if(id.equals("5atm")){
-			String material = "5 ATM";
-			products = productService.selectAllMaterialfoop(material,pageable);
-		}else if(id.equals("10atm")){
-			String material = "10 ATM";
-			products = productService.selectAllMaterialfoop(material,pageable);
-		}else if(id.equals("20atm")){
-			String material = "20 ATM";
-			products = productService.selectAllMaterialfoop(material,pageable);
-		}else if(id.equals("36mm")){
-			String thickness = "36mm";
-			products = productService.selectAllthickness(thickness,pageable);
-		}else if(id.equals("38mm")){
-			String thickness = "38mm";
-			products = productService.selectAllthickness(thickness,pageable);
-		}else if(id.equals("40mm")){
-			String thickness = "40mm";
-			products = productService.selectAllthickness(thickness,pageable);
-		}else if(id.equals("42mm")){
-			String thickness = "42mm";
-			products = productService.selectAllthickness(thickness,pageable);
-		}
+//		if(id.equals("mautrang")) {
+//			String color = "Trắng";
+//			products = productService.selectAllColor(color,pageable);
+//		}else if(id.equals("mauvang")) {
+//			String color = "Vàng";
+//			products = productService.selectAllColor(color,pageable);
+//		}else if(id.equals("mauden")){
+//			String color = "Đen";
+//			products = productService.selectAllColor(color,pageable);
+//		}else if(id.equals("mauxanh")){
+//			String color = "Xanh";
+//			products = productService.selectAllColor(color,pageable);
+//		}else if(id.equals("3atm")){
+//			String material = "3 ATM";
+//			products = productService.selectAllMaterialfoop(material,pageable);
+//		}else if(id.equals("5atm")){
+//			String material = "5 ATM";
+//			products = productService.selectAllMaterialfoop(material,pageable);
+//		}else if(id.equals("10atm")){
+//			String material = "10 ATM";
+//			products = productService.selectAllMaterialfoop(material,pageable);
+//		}else if(id.equals("20atm")){
+//			String material = "20 ATM";
+//			products = productService.selectAllMaterialfoop(material,pageable);
+//		}else if(id.equals("36mm")){
+//			String thickness = "36mm";
+//			products = productService.selectAllthickness(thickness,pageable);
+//		}else if(id.equals("38mm")){
+//			String thickness = "38mm";
+//			products = productService.selectAllthickness(thickness,pageable);
+//		}else if(id.equals("40mm")){
+//			String thickness = "40mm";
+//			products = productService.selectAllthickness(thickness,pageable);
+//		}else if(id.equals("42mm")){
+//			String thickness = "42mm";
+//			products = productService.selectAllthickness(thickness,pageable);
+//		}
 		//System.out.println(products.getSize());
 		
 		return products;

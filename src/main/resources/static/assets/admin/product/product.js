@@ -152,7 +152,7 @@ $scope.reset1 = function () {
 			alert("Số lượng sản phẩm không được để trống");
 			return false;
 		} 
-		
+		debugger;
         /*$http.post(`/rest/productsDetail/checkName`, item).then(resp => {
             if(resp.data !=null && resp.data !=""){
 				alert("Mã sản phẩn đã tồn tại");

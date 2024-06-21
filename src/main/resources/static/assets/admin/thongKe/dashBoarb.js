@@ -9,15 +9,15 @@ app.controller("thongke-ctrl", function($scope, $http) {
 	$scope.productASC = [];
 	$scope.productSmall = [];
 	
-	 $scope.cates = [];
+	 $scope.shoeType = [];
     $scope.brand = [];
     
     
 	$scope.initialize = function() {
 		
 		//load category
-        $http.get("rest/shoeType").then(resp => {
-            $scope.cates = resp.data;
+        $http.get("/rest/shoeType/getAllStatus").then(resp => {
+            $scope.shoeType = resp.data;
         })
         //load Brand
         $http.get("/rest/brand").then(resp => {
@@ -276,7 +276,7 @@ $scope.IsNumeric = function(sText) {
     
    $scope.checkKyThangInput = function (obj){
 	   var thangNam = document.getElementById(obj);
-		validDateFormat(thangNam,'mm/yyyy');
+		validDateFormat(thangNam,'dd/mm/yyyy');
 	}
 	
 	function validDateFormat(dateField, dateFormat){
@@ -363,6 +363,86 @@ $scope.IsNumeric = function(sText) {
 	}
 	if (month < 10) month = "0" + month ;
 	return "" + month + "-" + year;
+}
+
+function DaysArray(n) {
+    for (var i = 1; i <= n; i++) {
+        this[i] = 31;
+        if (i == 4 || i == 6 || i == 9 || i == 11) {
+            this[i] = 30;
+        }
+        if (i == 2) {
+            this[i] = 29;
+        }
+    }
+    return this;
+}
+
+function isDate(dtStr) {
+    var dtCh = "*";
+    if (dtStr == "") return true;
+    var daysInMonth = DaysArray(12);
+
+    for (var intElementNr = 0; intElementNr < strSeparatorArray.length; intElementNr++) {
+        if (dtStr.indexOf(strSeparatorArray[intElementNr]) != -1)
+            dtCh = strSeparatorArray[intElementNr];
+    }
+    if (dtCh != "*") //neu co ky hieu phan cach
+    {
+        var pos1 = dtStr.indexOf(dtCh);
+        var pos2 = dtStr.indexOf(dtCh, pos1 + 1);
+        if (pos1 == -1 || pos2 == -1) {
+            return false;
+        }
+        var strDay = dtStr.substring(0, pos1);
+        var strMonth = dtStr.substring(pos1 + 1, pos2);
+        var strYear = dtStr.substring(pos2 + 1);
+    } else //khong co ky hieu phan cach
+    {
+        if (dtStr.length > 5) {
+            strDay = dtStr.substr(0, 2);
+            strMonth = dtStr.substr(2, 2);
+            strYear = dtStr.substr(4);
+        } else
+            return false;
+    }
+
+    if (!isInteger(strYear) || !isInteger(strMonth) || !isInteger(strDay))
+        return false;
+
+    strYr = strYear;
+
+    if (strDay.charAt(0) == "0" && strDay.length > 1)
+        strDay = strDay.substring(1);
+
+    if (strMonth.charAt(0) == "0" && strMonth.length > 1)
+        strMonth = strMonth.substring(1);
+
+    for (var i = 1; i <= 3; i++) {
+        if (strYr.charAt(0) == "0" && strYr.length > 1) strYr = strYr.substring(1);
+    }
+
+    month = parseInt(strMonth);
+    day = parseInt(strDay);
+    year = parseInt(strYr);
+
+    if (strMonth.length < 1 || month < 1 || month > 12) {
+        return false;
+    }
+    if (strDay.length < 1 || day < 1 || day > 31 || (month == 2 && day > daysInFebruary(year))
+    		|| ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) || day > daysInMonth[month]) {
+        return false;
+    }
+
+    if (year < 50) year += 2000;
+    if (year > 50 && year < 1000) year += 1900;
+    if (strYear.length < 1 || year == 0 || year < minYear || year > maxYear) {
+        return false;
+    }
+    if (day < 10) day = "0" + day;
+    if (month < 10) month = "0" + month;
+
+    return "" + day + "/" + month + "/" + year;
 }
 	
 	function isInteger( s )
