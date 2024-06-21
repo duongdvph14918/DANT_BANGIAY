@@ -14,4 +14,5 @@ public class ShoeTypeController {
 //			return"/user/product/sanPham";
 //		}
 	
+	
 }
