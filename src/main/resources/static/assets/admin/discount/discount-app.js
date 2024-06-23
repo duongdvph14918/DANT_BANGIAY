@@ -64,6 +64,7 @@ app.controller("discount-ctrl", function($scope, $http) {
         }
 	}
 
+	
 	//cập nhật 
 	$scope.update = function() {
 		//alert("update ")

@@ -31,6 +31,7 @@ app.controller("voucher-ctrl", function($scope, $http) {
 		  	status: true,
 		}
 	}
+	
 	$scope.luu = function() { 
 		var item = angular.copy($scope.form);
 		//alert("lưu voucher " + item.voucherId)

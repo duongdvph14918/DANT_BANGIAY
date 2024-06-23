@@ -49,6 +49,7 @@ public class Accounts implements Serializable {
 	
 	private Date create_date;
 	
+	
 	@NotBlank
 	@Size(max = 50)
 	private String email;

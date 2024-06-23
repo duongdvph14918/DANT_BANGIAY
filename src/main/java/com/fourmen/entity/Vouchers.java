@@ -32,6 +32,7 @@ public class Vouchers implements Serializable{
 	private double valued;
 	private String name;
 	
+	
 	public String getName() {
 		return name;
 	}
