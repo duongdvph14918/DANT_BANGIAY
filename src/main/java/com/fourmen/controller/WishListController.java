@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fourmen.entity.Accounts;
 import com.fourmen.entity.Product;
+import com.fourmen.entity.ProductDetail;
 import com.fourmen.entity.UserAcounts;
 import com.fourmen.entity.WishList;
 import com.fourmen.service.AccountService;
@@ -47,17 +48,17 @@ public class WishListController {
 	
 	@RequestMapping("/appLike/{id}")
 	public String appLike(WishList item, @PathVariable("id") Integer id, Model model) {
-	    Product Product = productService.getById(id);
+	    ProductDetail Product = productService.getById(id);
 	    Accounts Accounts =	useAcc.User();
 	    if(Accounts==null) {
 	    	return "redirect:/login";
 	    }else {
 	    	WishList w = new WishList();
 		    w.setAccount(Accounts);
-			w.setProduct(Product);
+			w.setProductDetail(Product);
 			w.setLikeDate(new Date());
 		    
-		    WishList was = wishListService.findBy(Product.getProductId(),Accounts.getAccountId());
+		    WishList was = wishListService.findBy(Product.getProductDetailId(),Accounts.getAccountId());
 		    
 		    
 		    if (was == null) {
