@@ -74,51 +74,48 @@
 				</ol>
 			</nav>
 		</div>
-		<div class="row" align="center">
+	<div class="row" align="center">
 			<h4 class="">Sản phẩm yêu thích</h4>
 		</div>
 		<hr />
 		<div class="row">
 			<div class="khungtong" style="width: 1170px;">
-				<div id="listProduct" class="col-md-3 mt-4" th:each="listpro, state: ${wishLists}" style="margin-bottom: 20px;">
-					<div style="height: 330px;">
+				<div id="listProduct" class="col-md-2 mt-4" th:each="listpro, state: ${wishLists}" style="margin-bottom: 20px;">
                                 <div class="card" style="width: 18rem; height: 322px;">
-                                    <a th:href="@{|/4MEN/product/detail/${listpro.product.productId}|}" style="text-decoration: none;">
+                                    <a th:href="@{|/4MEN/product/detail/${listpro.productDetail.productDetailId}|}" style="text-decoration: none;">
                                         <div class="thumbnail" style="margin-bottom: 0px; padding-bottom: 0px;">
-                                            <img class="card-img-top" th:src="@{|/assets/images/${listpro.product.image}|}" alt="" style="height: 178px; width: 178px;">
-                                            <div class="discount-label green" th:if="${listpro.product.category.discount != null}" style="margin-left: 15px;">
-                                                <p>-[[${listpro.product.category.discount.percentDiscount}]]%</p>
+                                            <img class="card-img-top" th:src="@{|/assets/images/${listpro.productDetail.product.image}|}" alt="" style="border: none;">
+                                            <div class="discount-label green" th:if="${listpro.productDetail.discount != null}" style="margin-left: 15px;">
+                                                <p>-[[${listpro.productDetail.discount.percentDiscount}]]%</p>
                                             </div>
-                                            <input id="percent" type="hidden" th:value="${listpro.product.category.discount.percentDiscount}" th:if="${listpro.product.category.discount != null}"></input>
+                                            <input id="percent" type="hidden" th:value="${listpro.productDetail.discount.percentDiscount}" th:if="${listpro.productDetail.discount != null}"></input>
                                         </div>
                                         <div class="card-body" style="text-align: center;">
                                             <div>
-                                                <h5 class="card-title" style="font-size: 18px; padding-top: 10px;" th:text="${listpro.product.name}"></h5>
-                                                <input type="hidden" name="nameProduct" th:value="${listpro.product.name}" />
+                                                <h5 class="card-title" style="font-size: 18px; padding-top: 10px;" th:text="${listpro.productDetail.name}"></h5>
+                                                <input type="hidden" name="nameProduct" th:value="${listpro.productDetail.name}" />
                                             </div>
-                                            <div style="color: gray;">[[*{listpro.product.brand.name}]] - [[*{listpro.product.size.name}]] - [[*{listpro.product.style.name}]] </div>
-                                            <div style="margin-bottom: 10px;" th:if="${listpro.product.category.discount != null}">
-                                                <p class="giagoc">&nbsp;<del>[[*{#numbers.formatInteger(listpro.product.price,3,'POINT')}]] <span>đ</span></del></p>
-                                                <p name="priceGiam" class="giamgia" style="font-size: 18px;">[[*{#numbers.formatInteger(listpro.product.price - (listpro.product.price *(listpro.product.category.discount.percentDiscount)/100),3,'POINT')}]] đ</p>
-                                                <a class="col-sm-3 liked" id="heart" th:href="@{|like/${listpro.product.productId}|}" style="padding-left: 50%;padding-top: 5%;">
+                                            <div style="color: gray;">[[*{listpro.productDetail.product.brand.name}]] - [[*{listpro.productDetail.size.name}]] - [[*{listpro.productDetail.style.name}]] </div>
+                                            <div style="margin-bottom: 10px;" th:if="${listpro.productDetail.discount != null}">
+                                                <p class="giagoc">&nbsp;<del>[[*{#numbers.formatInteger(listpro.productDetail.price,3,'POINT')}]] <span>đ</span></del></p>
+                                                <p name="priceGiam" class="giamgia" style="font-size: 18px;">[[*{#numbers.formatInteger(listpro.productDetail.price - (listpro.productDetail.price *(listpro.productDetail.discount.percentDiscount)/100),3,'POINT')}]] đ</p>
+                                                <a class="col-sm-3 liked" id="heart" th:href="@{|like/${listpro.productDetail.productDetailId}|}" style="padding-left: 50%;padding-top: 5%;">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
 												</a>
-                                                <input id="initPrice" name="initPrice" type="hidden" th:value="${listpro.product.price}" />
+                                                <input id="initPrice" name="initPrice" type="hidden" th:value="${listpro.productDetail.price}" />
                                                 <input id="lastPrice" name="lastPrice" type="hidden" value=""></input>
                                             </div>
-                                            <div style="margin-bottom: 10px;" th:if="${listpro.product.category.discount == null}">
-                                                <p style="font-size: 15px; color: black;" >&nbsp;[[*{#numbers.formatInteger(listpro.product.price,3,'POINT')}]] <span>đ</span></p>
-                                                <!-- <p style="font-size: 18px;">&nbsp; <b>935000000<span> đ</span></b></p> -->
-                                                	<a class="col-sm-3 liked" id="heart" th:href="@{|like/${listpro.product.productId}|}" style="padding-left: 50%;padding-top: 5%;">
+                                            <div style="margin-bottom: 10px;" th:if="${listpro.productDetail.discount == null}">
+                                                <p style="font-size: 15px; color: black;" >&nbsp;[[*{#numbers.formatInteger(listpro.productDetail.price,3,'POINT')}]] <span>đ</span></p>
+                                                	<a class="col-sm-3 liked" id="heart" th:href="@{|like/${listpro.productDetail.productDetailId}|}" style="padding-left: 50%;padding-top: 5%;">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
 													</a>
-                                                <input id="initPrice" type="hidden" th:value="${listpro.product.price}" />
+                                                <input id="initPrice" type="hidden" th:value="${listpro.productDetail.price}" />
                                                 <input id="lastPrice" type="hidden" value=""></input>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                            </div>
 				</div>
 				<div style="text-align: center;">
 					<h5>[[${message}]]</h5>
@@ -151,6 +148,7 @@
 											});
 						});
 	</script>
+	
 
 </body>
 </html>

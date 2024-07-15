@@ -15,6 +15,8 @@ import com.fourmen.entity.ReportAccount;
 import com.fourmen.entity.WishList;
 @Repository
 public interface OrdersDao extends JpaRepository<Orders, Integer>{
+	@Query(value="select * from orders where orders.account_id = ?1 and orders.address is not null and orders.sdt_nn is not null and orders.ten_nn is not null order by orders.create_date desc",nativeQuery = true)
+	Page<Orders> findByUserId2(Long id,Pageable pageable);
 //	@Query("SELECT o FROM Orders o Where o.account.username=?1")
 //	List<Orders> findByUsername(String username);
 //	@Query("SELECT o FROM Orders o WHERE o.orderId LIKE ?1")
