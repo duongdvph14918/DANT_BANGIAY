@@ -3,14 +3,20 @@ app.controller("category-ctrl", function($scope, $http) {
 	$scope.items = [];
 	$scope.form = [];
 
+	$scope.discount = [];
 	$scope.initialize = function() {
 		//load account
-		$http.get("/rest/shoeType").then(resp => {
+		$http.get("/rest/categories").then(resp => {
 			$scope.items = resp.data;
 			$scope.reset();
 			console.log(resp.data);
 		})
 		
+		
+		//load discount
+        $http.get("/rest/discount/statusTrue").then(resp => {
+            $scope.discount = resp.data;
+        })
 
 	}
 $scope.reset1 = function () {
@@ -20,6 +26,9 @@ $scope.reset1 = function () {
 		
 		}
 	}
+	
+	
+	
 	//khởi đầu
 	$scope.initialize();
 
@@ -38,6 +47,7 @@ $scope.reset1 = function () {
             status: true,
 		}
 	}
+	
 	//thêm category mới
 	$scope.create = function() {
 		//alert("Thêm sp")
@@ -48,20 +58,20 @@ $scope.reset1 = function () {
 			alert("Tên danh mục không được để trống");
 			return false;
 		}
-		$http.get(`/rest/shoeType/${item.name}`).then(resp =>{
+		$http.get(`/rest/categories/${item.name}`).then(resp =>{
 			if (resp.data == '') {
-				$http.post(`/rest/shoeType`, item).then(resp => {
+				$http.post(`/rest/categories/`, item).then(resp => {
 					$scope.items.push(resp.data);
 					$scope.reset();
 					$scope.initialize();
 					alert("Thêm mới thành công");
 					$(".nav-tabs a:eq(0)").tab('show')
 				}).catch(error => {
-					alert("Lỗi Thêm mới loại giày");
+					alert("Lỗi Thêm mới account");
 					console.log("error", error);
 				});
 			} else {
-				alert("Đã có loại giày thể thao này")
+				alert("Đã có loại giày đá bóng này")
 				console.log(resp.data)
 			}	
 		})	
@@ -75,7 +85,7 @@ $scope.reset1 = function () {
 			return false;
 		}
 		var item = angular.copy($scope.form);
-		$http.put(`/rest/shoeType/${item.shoeTypeId}`, item).then(resp => {
+		$http.put(`/rest/categories/${item.shoeTypeId}`, item).then(resp => {
 			var index = $scope.items.findIndex(p => p.shoeTypeId == item.shoeTypeId);
 			$scope.items[index] = item;
 			alert("Cập nhật thành công");
@@ -89,7 +99,7 @@ $scope.reset1 = function () {
 	//xóa account
 	$scope.delete = function(item) {
 		//alert("delete sp")
-		/*$http.delete(`/rest/shoeType/${item.shoeTypeId}`).then(resp => {
+		/*$http.delete(`/rest/categories/${item.shoeTypeId}`).then(resp => {
 			var index = $scope.items.findIndex(p => p.shoeTypeId == item.shoeTypeId);
 			$scope.items.splice(index, 1);
 			$scope.reset();
@@ -98,7 +108,7 @@ $scope.reset1 = function () {
 			alert("Lỗi xóa Account" + error);
 			console.log("error", error);
 		})*/
-		$http.put(`/rest/shoeType/delete/${item.shoeTypeId}`, item).then(resp => {
+		$http.put(`/rest/categories/delete/${item.shoeTypeId}`, item).then(resp => {
 			var index = $scope.items.findIndex(p => p.shoeTypeId == item.shoeTypeId);
 			$scope.items[index] = item;
 			alert("xóa category thành công");
@@ -111,18 +121,18 @@ $scope.reset1 = function () {
 	}
 	
 	
-	///tìm kiếm
+	$///tìm kiếm
     $scope.timKiem = function () {
         var name = document.getElementById("keyword").value;
         var trangThai = document.getElementById("trangThai").value;
         if (trangThai == "") {
             trangThai = null;
             //alert("Tìm Kiếm: " + name + " trang thai= " + trangThai)
-            $http.get(`/rest/shoeType/timKiem/${name}/${trangThai}`).then(resp => {
+            $http.get(`/rest/categories/timKiem/${name}/${trangThai}`).then(resp => {
                 $scope.items = resp.data;
             })
         } else {
-            $http.get(`/rest/shoeType/${name}/${trangThai}`).then(resp => {
+            $http.get(`/rest/categories/${name}/${trangThai}`).then(resp => {
                 $scope.items = resp.data;
             })
         }
@@ -132,11 +142,11 @@ $scope.reset1 = function () {
         var trangThai = document.getElementById("trangThai").value;
         //alert("Trang thái " + trangThai )
         if (trangThai == "") {
-            $http.get("/rest/shoeType").then(resp => {
+            $http.get("/rest/categories").then(resp => {
                 $scope.items = resp.data;
             })
         } else {
-            $http.get(`/rest/shoeType/timKiem/${trangThai}`).then(resp => {
+            $http.get(`/rest/categories/timKiem/${trangThai}`).then(resp => {
                 $scope.items = resp.data;
             })
         }
