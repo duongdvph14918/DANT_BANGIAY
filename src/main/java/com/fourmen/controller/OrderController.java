@@ -342,7 +342,7 @@ public class OrderController {
 	}
 //	
 	@GetMapping("/thanh-toan-thanh-cong")
-    public String thanhcong(Model model) {
+    public String thanhcong(Model model ,HttpServletRequest request) {
 		
 		String vnp_ResponseCode = req.getParameter("vnp_ResponseCode");
 		
@@ -370,7 +370,7 @@ public class OrderController {
 		if(vnp_ResponseCode.equals("00")) {
 			Orders order = (Orders) session.getAttribute("OrderganNhat");
 			Accounts accountKh = (Accounts) session.getAttribute("accountKh");		
-			String address = accountKh.getAddress();
+			String address = (String) session.getAttribute("kh_diachi");
 			String maVoucher = (String) session.getAttribute("maVoucher");
 			
 			
@@ -397,7 +397,13 @@ public class OrderController {
 						voucherService.save(vouchers);
 						order.setVoucher(vouchers);
 					}else {
-				}
+						int stt=0; 
+						for (int i = 0; i < lst.size(); i++) {
+							String voucherId = lst.get(i).getVoucher().getVoucherId();
+							if(voucherId.equals(maVoucher)) {
+								stt += 1; 
+							}
+						}
 						if(stt == 0) {
 							int slVouchertru = vouchers.getQuantity() - 1;
 							vouchers.setQuantity(slVouchertru);
@@ -424,7 +430,7 @@ public class OrderController {
 //			order.setDiaChiNn(accountKh.getAddress());
 			
 			order.setStatus(1);
-			order.setTthaiThanhToan(1);
+			order.setPaymentStatus(1);
 			order.setCreateDate(new Date());
 			orderService.save(order);
 			
@@ -434,9 +440,9 @@ public class OrderController {
 			}
 			//chỉnh sửa lại số lượng thanh toán
 			for (int i = 0; i < orderDetail.size(); i++) {
-				int productId = orderDetail.get(i).getProduct().getProductId();
+				int productId = orderDetail.get(i).getProductDetail().getProductDetailId();
 				int slgmua = orderDetail.get(i).getQuantity();
-				Product product = productService.getById(productId);
+				ProductDetail product = productService.getById(productId);
 				int slgProduct = product.getQuantity();
 				int slgMoi = slgProduct - slgmua;
 				if(slgMoi < 0) {
@@ -447,6 +453,7 @@ public class OrderController {
 				productService.save(product);				 		
 			}
 			
+			
 			double vn = order.getTotal();
 	        float vn2 = (float) vn;
 	        long vnd = (long) vn2;
@@ -456,8 +463,8 @@ public class OrderController {
 			
 			model.addAttribute("order", order);
 			model.addAttribute("str1", str1);
-			String email = orderDao.getEmail(order.getOrderId());
-			sendSimpleEmail(email, order);
+			//String email = orderDao.getEmail(order.getOrderId());
+			//sendSimpleEmail(email, order);
 			return "success1";
 		}else {
 			
@@ -465,104 +472,73 @@ public class OrderController {
 		}
 
     }
-//	
-//	@GetMapping("/thanh-toan-khong-thanh-cong")
-//    public String khongthanhcong(Model model) {
-//		List<Color> colors = colorSv.findAll();
-//		model.addAttribute("colors", colors);
-//		List<Size> sizes = sizeSV.findAll();
-//		model.addAttribute("sizes",sizes);
-//		
-//		List<Brand> listBrand = brandService.findAll();
-//		model.addAttribute("brands", listBrand);
-//    	return "unsuccess";
-//    }
-//	
-//	@GetMapping("/dat-hang-thanh-cong")
-//    public String okCOD(Model model) {
-//		List<Color> colors = colorSv.findAll();
-//		model.addAttribute("colors", colors);
-//		List<Size> sizes = sizeSV.findAll();
-//		model.addAttribute("sizes",sizes);
-//		
-//		List<Brand> listBrand = brandService.findAll();
-//		model.addAttribute("brands", listBrand);
-////		Orders order = (Orders) session.getAttribute("OrderganNhat");
-//		account = useAcc.User();
-//		Orders order1 = odao.getGanNhat(account.getAccountId());
-//		/* Format ngày tháng */
-//		Date date = new Date();
-//		date = order1.getCreateDate();			
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-//        String strDate = formatter.format(date);
-//        System.out.println("Date Format with dd MMMM yyyy: " + strDate); 
-//        
-//		/* Format tiền */
-//        double vn = order1.getTotal();
-//        float vn2 = (float) vn;
-//        long vnd = (long) vn2;
-//        Locale localeVN = new Locale("vi", "VN");
-//        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-//        String str1 = currencyVN.format(vnd);
-//        System.out.println(str1);
-//        
-//        
-//        // load lai sl sp
-//        List<OrderDetail> orderDetail = (List<OrderDetail>) session.getAttribute("listOrderDetail");
-//		if(orderDetail.size() ==0 || orderDetail.equals(null)) {
-//			return "success";
-//		}
-//		//chỉnh sửa lại số lượng thanh toán
-//		for (int i = 0; i < orderDetail.size(); i++) {
-//			int productId = orderDetail.get(i).getProduct().getProductId();
-//			int slgmua = orderDetail.get(i).getQuantity();
-//			Product product = productService.getById(productId);
-//			int slgProduct = product.getQuantity();
-//			int slgMoi = slgProduct - slgmua;
-//			if(slgMoi < 0) {
-//				return "redirect:/thanh-toan-khong-thanh-cong";
-//			}
-//			product.setQuantity(slgMoi);
-//			productService.save(product);				 		
-//		}
+	
+	@GetMapping("/thanh-toan-khong-thanh-cong")
+    public String khongthanhcong(Model model) {
+		List<Color> colors = colorSv.findAll();
+		model.addAttribute("colors", colors);
+		List<Size> sizes = sizeSV.findAll();
+		model.addAttribute("sizes",sizes);
+		
+		List<Brand> listBrand = brandService.findAll();
+		model.addAttribute("brands", listBrand);
+    	return "unsuccess";
+    }
+	
+	@GetMapping("/dat-hang-thanh-cong")
+    public String okCOD(Model model) {
+		List<Color> colors = colorSv.findAll();
+		model.addAttribute("colors", colors);
+		List<Size> sizes = sizeSV.findAll();
+		model.addAttribute("sizes",sizes);
+		
+		List<Brand> listBrand = brandService.findAll();
+		model.addAttribute("brands", listBrand);
+//		Orders order = (Orders) session.getAttribute("OrderganNhat");
+		account = useAcc.User();
+		Orders order1 = odao.getGanNhat(account.getAccountId());
+		/* Format ngày tháng */
+		Date date = new Date();
+		date = order1.getCreateDate();			
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strDate = formatter.format(date);
+        System.out.println("Date Format with dd MMMM yyyy: " + strDate); 
+        
+		/* Format tiền */
+        double vn = order1.getTotal();
+        float vn2 = (float) vn;
+        long vnd = (long) vn2;
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+        String str1 = currencyVN.format(vnd);
+        System.out.println(str1);
+        
+        
+        // load lai sl sp
+        List<OrderDetail> orderDetail = (List<OrderDetail>) session.getAttribute("listOrderDetail");
+		if(orderDetail.size() ==0 || orderDetail.equals(null)) {
+			return "success";
+		}
+		//chỉnh sửa lại số lượng thanh toán
+		for (int i = 0; i < orderDetail.size(); i++) {
+			int productId = orderDetail.get(i).getProductDetail().getProductDetailId();
+			int slgmua = orderDetail.get(i).getQuantity();
+			ProductDetail product = productService.getById(productId);
+			int slgProduct = product.getQuantity();
+			int slgMoi = slgProduct - slgmua;
+			if(slgMoi < 0) {
+				return "redirect:/thanh-toan-khong-thanh-cong";
+			}
+			product.setQuantity(slgMoi);
+			productService.save(product);				 		
+		}
 //        String mail = orderDao.getEmail(order1.getOrderId());
-//        model.addAttribute("vnd", str1);
-//        model.addAttribute("date", strDate);
-//		model.addAttribute("order", order1);
-//		sendSimpleEmail(mail, order1);
-//    	return "success1";
-//    }
-//	
-//	
-//	
-//	@RequestMapping("/order/detail/{id}")
-//	public String detail(@PathVariable("id") Integer id,Model model){
-//		List<Product> list = productService.findTop6Img();
-//		model.addAttribute("items", list);
-//		List<Color> colors = colorSv.findAll();
-//		model.addAttribute("colors", colors);
-//		List<Size> sizes = sizeSV.findAll();
-//		model.addAttribute("sizes",sizes);
-//		
-//		List<Brand> listBrand = brandService.findAll();
-//		model.addAttribute("brands", listBrand);
-//		model.addAttribute("order", ordersService.getById(id));
-//		
-//		System.out.println("order " + ordersService.getById(id).getClass());
-//		return "/user/DonHang1";
-//	}
-//	 public void sendSimpleEmail(String email,Orders order) {
-//
-//	        // Create a Simple MailMessage.
-//	        SimpleMailMessage message = new SimpleMailMessage();
-//
-//	        message.setTo(email);
-//	        message.setSubject("Đặt hàng thành công tại 4MEN.COM");
-//	        message.setText("Cảm ơn bạn đã mua hàng tại 4MEN.COM.\r\n"
-//	        		+ "Mã hóa đơn của bạn là: "+order.getOrderId()+"\r\n"	
-//	        		+ "Vui lòng click vào đường link: http://localhost:8080/4MEN/account/history/detail/"+order.getOrderId()+ " để xem chi tiết hóa đơn.\r\n"
-//	        		+ "Xin chân thành cảm ơn đã sử dụng dịch vụ.");
-//	        emailSender.send(message);
-//	    }
+//        sendSimpleEmail(mail, order1);
+        model.addAttribute("vnd", str1);
+        model.addAttribute("date", strDate);
+		model.addAttribute("order", order1);
+		
+    	return "success1";
+    }
 
 }

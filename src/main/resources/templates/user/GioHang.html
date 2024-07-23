@@ -87,6 +87,7 @@
                                 <tr class="small text-uppercase">
                                     <th scope="col">Ảnh</th>
                                     <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col">Màu sắc</th>
                                     <th scope="col" width="220">Số lượng</th>
                                     <th scope="col" width="220">Giá</th>
                                     <th scope="col"  class="text-right d-none d-md-block">Hành động</th>
@@ -103,10 +104,11 @@
                                     <div style="margin-top: 50px;"><a  href="/4MEN/product/detail/{{item.productId}}">{{item.name}}</a></div>
                                     </td>
 
-                                    <td><div style="margin-top: 45px; border:hidden;">
-                                    		<input ng-change="cart.checkQuantity($index)" ng-model="item.qty"  type="number" min="1" required id="qty" ng-pattern="^[0-9]*[1-9][0-9]*$"  onkeyup="value=value.replace(/[^0123456789\\.]/g,'');">
+                                       <td><div style="margin-top: 45px; border:hidden;">
+                                    		<input ng-change="cart.checkQuantity($index)" ng-model="item.qty"  type="number" min="1" required id="qty" ng-pattern="^[0-9]*[1-9][0-9]*$"  onkeyup="value=value.replace(/[^123456789\\.]/g,'');">
                                     	</div>
                                     </td>
+                                    
                                     <td>
                                         <div class="price-wrap" style="margin-top: 50px;">
                                             <a class="price">{{item.price * item.qty|number:0}} VNĐ</a>
